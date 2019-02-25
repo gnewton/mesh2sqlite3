@@ -97,9 +97,6 @@ func loadData() {
 			for _, tree := range d.TreeNumberList.TreeNumber {
 				count = count + 1
 				s, p := split(tree)
-				if d.DescriptorUI == "D048531" {
-					fmt.Println("+++", s, p)
-				}
 				mt := new(MeshTree)
 				mt.ID = count
 				mt.Year = d.DateCreated.Year.Text
@@ -113,12 +110,10 @@ func loadData() {
 
 				case 13:
 					mt.T13 = &p[12]
-					fmt.Println(tree)
 					fallthrough
 
 				case 12:
 					mt.T12 = &p[11]
-					fmt.Println(tree)
 					fallthrough
 
 				case 11:
