@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/gnewton/gomesh2016"
+	"github.com/gnewton/mesh2sqlite3/lib"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -37,29 +38,6 @@ func main() {
 	fmt.Println(len(os.Args), os.Args)
 	loadData()
 
-}
-
-type MeshTree struct {
-	ID             int64
-	DescriptorUI   string `sql:"size:16"`
-	DescriptorName string
-	Tree           string
-	Year           int16
-	Depth          int
-	T0             *string `sql:"size:1"`
-	T1             *string `sql:"size:3"`
-	T2             *string `sql:"size:3"`
-	T3             *string `sql:"size:3"`
-	T4             *string `sql:"size:3"`
-	T5             *string `sql:"size:3"`
-	T6             *string `sql:"size:3"`
-	T7             *string `sql:"size:3"`
-	T8             *string `sql:"size:3"`
-	T9             *string `sql:"size:3"`
-	T10            *string `sql:"size:3"`
-	T11            *string `sql:"size:3"`
-	T12            *string `sql:"size:3"`
-	T13            *string `sql:"size:3"`
 }
 
 func loadData() {
@@ -97,7 +75,7 @@ func loadData() {
 			for _, tree := range d.TreeNumberList.TreeNumber {
 				count = count + 1
 				s, p := split(tree)
-				mt := new(MeshTree)
+				mt := new(lib.MeshTree)
 				mt.ID = count
 				mt.Year = d.DateCreated.Year.Text
 				mt.DescriptorUI = d.DescriptorUI
@@ -181,7 +159,7 @@ func addToplevel(db *gorm.DB, count *int64) {
 		*count = *count + 1
 		fmt.Println(topLevel[i], topLevel[i+1])
 		name, id := topLevel[i], topLevel[i+1]
-		mt := new(MeshTree)
+		mt := new(lib.MeshTree)
 		mt.ID = *count
 		mt.DescriptorUI = id
 		mt.DescriptorName = name

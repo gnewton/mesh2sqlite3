@@ -2,8 +2,10 @@ package main
 
 import (
 	"database/sql"
+	"github.com/gnewton/mesh2sqlite3/lib"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
+
 	//_ "github.com/mxk/go-sqlite"
 	//_ "github.com/go-sql-driver/mysql"
 	"log"
@@ -60,7 +62,7 @@ func dbInit(dbFile string) (*gorm.DB, error) {
 	}
 	//	log.Printf("%v\n", *db)
 
-	db.CreateTable(&MeshTree{})
+	db.CreateTable(&lib.MeshTree{})
 	return db, nil
 }
 
