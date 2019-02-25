@@ -58,7 +58,7 @@ func dbInit(dbFile string) (*gorm.DB, error) {
 		log.Println(err)
 		return nil, err
 	}
-	log.Printf("%v\n", *db)
+	//	log.Printf("%v\n", *db)
 
 	db.CreateTable(&MeshTree{})
 	return db, nil
